@@ -10,7 +10,7 @@ Retrofit with all necessary dependencies and proguard rules
 		maven { url 'https://jitpack.io' }
 	}
     dependencies {
-    	implementation 'com.github.kakadu-dev:retrofit:1.0.2'
+    	implementation 'com.github.kakadu-dev:retrofit:1.1.3'
     	...
     }
 ```
