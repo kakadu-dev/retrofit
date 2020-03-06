@@ -3,27 +3,28 @@ plugins {
 }
 apply plugin: 'com.android.library'
 
-def build = 3
-
-group = 'com.github.kakadu-dev'
-version = "1.1.$build"
-
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 28
-        versionCode build
-        versionName version
+        targetSdkVersion 29
+        versionCode 4
+        versionName "1.2.$versionCode-SNAPSHOT"
+        archivesBaseName = 'retrofit'
         consumerProguardFiles 'proguard-rules.pro'
     }
 }
 dependencies {
-    api 'com.squareup.retrofit2:retrofit:2.6.2'
-    api 'com.squareup.retrofit2:converter-gson:2.6.2'
-    api 'com.squareup.okhttp3:okhttp:4.2.0'
-    api 'com.squareup.okhttp3:logging-interceptor:4.2.0'
-    api 'com.squareup.okio:okio:2.4.0'
+    api 'com.squareup.retrofit2:retrofit:2.7.2'
+    api 'com.squareup.retrofit2:converter-gson:2.7.2'
+    api platform('com.squareup.okhttp3:okhttp-bom:4.4.0')
+    api 'com.squareup.okhttp3:okhttp'
+    api 'com.squareup.okhttp3:logging-interceptor'
+    api 'com.squareup.okio:okio:2.4.3'
 }
+
+// publish
+group = 'com.github.kakadu-dev'
+version = android.defaultConfig.versionName
 
