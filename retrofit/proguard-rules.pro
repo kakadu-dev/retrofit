@@ -7,6 +7,9 @@
 # Retrofit does reflection on method and parameter annotations.
 -keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
 
+# Keep annotation default values (e.g., retrofit2.http.Field.encoded).
+-keepattributes AnnotationDefault
+
 # Retain service method parameters when optimizing.
 -keepclassmembers,allowshrinking,allowobfuscation interface * {
     @retrofit2.http.* <methods>;
@@ -30,6 +33,15 @@
 -if interface * { @retrofit2.http.* <methods>; }
 -keep,allowobfuscation interface <1>
 
+# Keep generic signature of Call, Response (R8 full mode strips signatures from non-kept items).
+-keep,allowobfuscation,allowshrinking interface retrofit2.Call
+-keep,allowobfuscation,allowshrinking class retrofit2.Response
+
+# With R8 full mode generic signatures are stripped for classes that are not
+# kept. Suspend functions are wrapped in continuations where the type argument
+# is used.
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
+
 
 # OKHTTP https://github.com/square/okhttp
 
@@ -42,5 +54,13 @@
 # Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
 -dontwarn org.codehaus.mojo.animal_sniffer.*
 
-# OkHttp platform used only on JVM and when Conscrypt dependency is available.
--dontwarn okhttp3.internal.platform.ConscryptPlatform
+# OkHttp platform used only on JVM and when Conscrypt and other security providers are available.
+-dontwarn okhttp3.internal.platform.**
+-dontwarn org.conscrypt.**
+-dontwarn org.bouncycastle.**
+-dontwarn org.openjsse.**
+
+# OKIO https://square.github.io/okio/#r8-proguard
+
+# Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
+#-dontwarn org.codehaus.mojo.animal_sniffer.*

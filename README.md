@@ -7,10 +7,10 @@ Retrofit with all necessary dependencies and proguard rules
 ## Add to your build.gradle:
 ```groovy
     repositories {
-		maven { url 'https://jitpack.io' }
-	}
-    dependencies {
-    	implementation 'com.github.kakadu-dev:retrofit:1.2.4'
-    	...
-    }
+    maven { url 'https://jitpack.io' }
+}
+dependencies {
+    implementation 'com.github.kakadu-dev:retrofit:1.3.5'
+    ...
+}
 ```
